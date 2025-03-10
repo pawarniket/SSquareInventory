@@ -1,0 +1,80 @@
+<!-- 
+<div id="global-loader" >
+    <div class="whirly-loader"> </div>
+</div> -->
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+    <div class="account-content">
+        <div class="login-wrapper bg-img">
+            <div class="login-content authent-content">
+                <form   [formGroup]="SignInForm">
+                    <div class="login-userset">
+                        <div class="login-logo logo-normal">
+                           <img src="assets/img/logo.svg" alt="img">
+                       </div>
+                       <a href="index.html" class="login-logo logo-white">
+                           <img src="assets/img/logo-white.svg"  alt="Img">
+                       </a>
+                       <div class="login-userheading">
+                           <h3>Sign In</h3>
+                           <h4 class="fs-16">Access the Dreamspos panel using your email and passcode.</h4>
+                       </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email <span class="text-danger"> *</span></label>
+                            <div class="input-group">
+                                <input type="text" value="" class="form-control border-end-0" placeholder="Enter Email" id="email" 
+                                formControlName = "email" 
+                                >
+                                <span class="input-group-text border-start-0">
+                                    <i class="ti ti-mail"></i>
+                                </span>
+                            </div>
+                            <div
+                            *ngIf="
+                              SignInForm.get('email')?.invalid &&
+                              SignInForm.get('email')?.touched
+                            "
+                            class="text-danger text-sm"
+                          >
+                          Email is required.
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password <span class="text-danger"> *</span></label>
+                            <div class="pass-group">
+                                <input [type]="passwordVisible ? 'text' : 'password'"   class="pass-input form-control" placeholder="Enter Your Password"
+                                [ngClass]="{'border-danger': isPassEmpty && passwordControl?.invalid}"
+                                style=" background-color: #f6f6f6; font-family: Work Sans; " formControlName = "password" >
+                                <span  
+                                [ngClass]="passwordVisible ? ' ti toggle-password ti-eye-on text-gray-9' : 'ti toggle-password ti-eye-off text-gray-9'"  
+                                (click)="togglePasswordVisibility()"
+                            >
+                            </span>
+                            </div>
+                            <div
+                            *ngIf="
+                              SignInForm.get('password')?.invalid &&
+                              SignInForm.get('password')?.touched
+                            "
+                            class="text-danger text-sm"
+                          >
+                          password is required.
+                          </div>
+                          
+                        </div>
+                       
+                       <div class="form-login">
+                           <button type="submit" class="btn btn-primary w-100" (click)="SignIn()">Sign In</button>
+                       </div>
+                    
+                   
+                       
+                   </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Main Wrapper -->
+  
