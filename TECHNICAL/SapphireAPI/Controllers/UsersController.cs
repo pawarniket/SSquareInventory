@@ -59,11 +59,12 @@ namespace MS.SSquare.API.Controllers
 
 
                 int status_code = Convert.ToInt32(ds.Tables[0].Rows[0]["status_code"].ToString());
-                string password = ds.Tables[0].Rows[0]["PasswordHash"].ToString();
 
 
                 if (status_code == 100)
                 {
+                    string password = ds.Tables[0].Rows[0]["PasswordHash"].ToString();
+
                     if (user.Password == password)
                     {
                         oServiceRequestProcessor = new ServiceRequestProcessor();
@@ -75,9 +76,14 @@ namespace MS.SSquare.API.Controllers
                         return Ok(oServiceRequestProcessor.onUserNotFound());
                     }
                 }
-                else
+                else if(status_code == 200)
                 {
 
+                    oServiceRequestProcessor = new ServiceRequestProcessor();
+                    return Ok(oServiceRequestProcessor.onUserNotFound());
+                }
+                else
+                {
                     oServiceRequestProcessor = new ServiceRequestProcessor();
                     return Ok(oServiceRequestProcessor.onUserNotFound());
                 }
