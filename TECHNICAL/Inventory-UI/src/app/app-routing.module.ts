@@ -4,6 +4,7 @@ import { SignINComponent } from './pages/sign-in/sign-in.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { ProductComponent } from './pages/sidebar/product/product.component';
 import { AddProductComponent } from './pages/sidebar/product/add-product/add-product.component';
+import { AddcategoryComponent } from './pages/sidebar/addcategory/addcategory.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
           { path: 'AddProduct', component: AddProductComponent }
         ]
        },
+       {path: 'Category', component: AddcategoryComponent}
 
 
     ]

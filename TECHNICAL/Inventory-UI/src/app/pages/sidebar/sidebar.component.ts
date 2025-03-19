@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+  isSidebarHidden = false;
 
+  toggleSidebar() {
+    this.isSidebarHidden = !this.isSidebarHidden;
+  }
 }

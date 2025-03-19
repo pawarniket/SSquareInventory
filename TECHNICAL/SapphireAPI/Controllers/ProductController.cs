@@ -169,6 +169,82 @@ namespace MS.SSquare.API.Controllers
             }
         }
 
+
+
+
+
+        [Route("Productcategory/Insert")]
+        [HttpPost]
+        public IActionResult Productcategory(Products product)
+        {
+            try
+            {
+
+                DBUtility oDBUtility = new DBUtility(_configurationIG);
+                oDBUtility.AddParameters("@CategoryName", DBUtilDBType.Varchar, DBUtilDirection.In, 250, product.CategoryName);
+                oDBUtility.AddParameters("@Description", DBUtilDBType.Varchar, DBUtilDirection.In, 150, product.Description);
+               
+
+                DataSet ds = oDBUtility.Execute_StoreProc_DataSet("USP_INSERT_PRODUCTCATEGORY");
+                return Ok(new { status_code = 100, Message = "Product Category successfully added." });
+
+
+            }
+            catch (Exception ex)
+            {
+                oServiceRequestProcessor = new ServiceRequestProcessor();
+                return BadRequest(oServiceRequestProcessor.onError(ex.Message));
+            }
+
+        }
+
+
+
+
+        [Route("Productcategory/update")]
+        [HttpPost]
+        public IActionResult ProductcategoryUpdate(Products product)
+        {
+
+            try
+            {
+                DBUtility oDBUtility = new DBUtility(_configurationIG);
+     
+
+                if (product.CategoryID != 0)
+                {
+                    oDBUtility.AddParameters("@CategoryID", DBUtilDBType.Integer, DBUtilDirection.In, 10, product.CategoryID);
+                }
+                if (product.CategoryName != null)
+                {
+                    oDBUtility.AddParameters("@CategoryName", DBUtilDBType.Varchar, DBUtilDirection.In, 100, product.CategoryName);
+                }
+                if (product.Description != null)
+                {
+                    oDBUtility.AddParameters("@Description", DBUtilDBType.Varchar, DBUtilDirection.In, -1, product.Description);
+                }
+            
+
+
+
+
+
+                DataSet ds = oDBUtility.Execute_StoreProc_DataSet("USP_UPDATE_PRODUCTCATEGORY");
+                oServiceRequestProcessor = new ServiceRequestProcessor();
+                return Ok(oServiceRequestProcessor.ProcessRequest(ds));
+
+            }
+            catch (Exception ex)
+            {
+                oServiceRequestProcessor = new ServiceRequestProcessor();
+                return BadRequest(oServiceRequestProcessor.onError(ex.Message));
+            }
+
+        }
+
+
+
+
         [Route("Productcategory/get")]
         [HttpPost]
         public IActionResult productcategory(Products product)

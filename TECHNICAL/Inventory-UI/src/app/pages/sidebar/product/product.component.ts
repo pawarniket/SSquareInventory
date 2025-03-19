@@ -1,7 +1,7 @@
 import { Component, } from '@angular/core';
 import { ProductService } from '../../../core/service/product/product.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-declare function closePopup(id: any): any;
+// declare function closePopup(id: any): any;
 
 @Component({
   selector: 'app-product',
@@ -57,7 +57,7 @@ export class ProductComponent {
       this.products.UpdateProduct(val).subscribe(
         response => {
           console.log("response", response);
-          this.closePopup("addProductModal");
+          // this.closePopup("addProductModal");
           this.productform.reset();
         });
 
@@ -80,7 +80,7 @@ export class ProductComponent {
       this.products.AddProduct(val).subscribe(
         response => {
           console.log("response", response);
-          this.closePopup("addProductModal");
+          // this.closePopup("addProductModal");
           this.productform.reset();
         });
     }
@@ -128,12 +128,12 @@ export class ProductComponent {
   }
 
 
-  closePopup(modalId: string) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-      modal.style.display = "none"; // Or use Bootstrap modal hide: $('#modalId').modal('hide');
-    }
-  }
+  // closePopup(modalId: string) {
+  //   const modal = document.getElementById(modalId);
+  //   if (modal) {
+  //     modal.style.display = "none"; // Or use Bootstrap modal hide: $('#modalId').modal('hide');
+  //   }
+  // }
   Resetform(){
     this.productform.reset();
 

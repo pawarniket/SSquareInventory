@@ -9,6 +9,8 @@ import { SignINComponent } from './pages/sign-in/sign-in.component';
 import { ProductComponent } from './pages/sidebar/product/product.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { AddProductComponent } from './pages/sidebar/product/add-product/add-product.component';
+import { AddcategoryComponent } from './pages/sidebar/addcategory/addcategory.component';
+import { HeaderComponent } from './pages/Layout/header/header.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { AddProductComponent } from './pages/sidebar/product/add-product/add-pro
     SignINComponent,
     ProductComponent,
     SidebarComponent,
-    AddProductComponent
+    AddProductComponent,
+    AddcategoryComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
