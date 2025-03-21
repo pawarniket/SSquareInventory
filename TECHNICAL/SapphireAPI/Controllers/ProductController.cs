@@ -182,8 +182,10 @@ namespace MS.SSquare.API.Controllers
 
                 DBUtility oDBUtility = new DBUtility(_configurationIG);
                 oDBUtility.AddParameters("@CategoryName", DBUtilDBType.Varchar, DBUtilDirection.In, 250, product.CategoryName);
-                oDBUtility.AddParameters("@Description", DBUtilDBType.Varchar, DBUtilDirection.In, 150, product.Description);
-               
+                if (product.Description != null)
+                {
+                    oDBUtility.AddParameters("@Description", DBUtilDBType.Varchar, DBUtilDirection.In, 150, product.Description);
+                }
 
                 DataSet ds = oDBUtility.Execute_StoreProc_DataSet("USP_INSERT_PRODUCTCATEGORY");
                 return Ok(new { status_code = 100, Message = "Product Category successfully added." });

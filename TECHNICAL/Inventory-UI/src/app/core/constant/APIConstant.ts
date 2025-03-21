@@ -10,6 +10,12 @@ export const APIConstant = {
         AddProducts:'Product/Insert',
         UpdateProducts:'Product/update',
         getProduct:'Product/get',
-        ProductCategory:'Productcategory/get'
+      },
+      Productcategories:{
+        AddProductscategory:'Productcategory/Insert',
+        UpdateProductscategory:'Productcategory/update',
+        getProductCategory:'Productcategory/get'
+
       }
+
 }

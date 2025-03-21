@@ -25,8 +25,4 @@ export class ProductService {
 
     }
 
-    getProductcategory(val:any){
-      return this.masterService.post(environment.api+APIConstant.Products.ProductCategory,val)
-
-    }
   }

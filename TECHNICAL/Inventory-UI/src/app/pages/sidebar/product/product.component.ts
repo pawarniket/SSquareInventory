@@ -1,6 +1,7 @@
 import { Component, } from '@angular/core';
 import { ProductService } from '../../../core/service/product/product.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProductcategoryService } from '../../../core/service/productcategory/productcategory.service';
 // declare function closePopup(id: any): any;
 
 @Component({
@@ -13,6 +14,7 @@ export class ProductComponent {
   Productlist: any;
   ProductCategoryList:any;
   constructor(private products: ProductService,
+   private ProductcategoryService: ProductcategoryService,
     private formBuilder: FormBuilder) {
 
   }
@@ -102,7 +104,7 @@ export class ProductComponent {
   getProductcategory() {
     const val = {
     }
-    this.products.getProductcategory(val).subscribe(
+    this.ProductcategoryService.getProductcategory(val).subscribe(
       response => {
         console.log("response", response);
         this.ProductCategoryList = JSON.parse(response['message']);
