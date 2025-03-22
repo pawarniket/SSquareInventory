@@ -102,5 +102,39 @@ namespace MS.SSquare.API.Controllers
             }
 
         }
+
+        [Route("Billing/Get")]
+        [HttpPost]
+        public IActionResult add(Billing billing)
+        {
+            try
+            {
+                DBUtility oDBUtility = new DBUtility(_configurationIG);
+                if (billing.SaleID != 0)
+                {
+                    oDBUtility.AddParameters("@SaleID", DBUtilDBType.Integer, DBUtilDirection.In, 50, billing.SaleID);
+                }
+
+                if (billing.InvoiceID != 0)
+                {
+                    oDBUtility.AddParameters("@InvoiceID", DBUtilDBType.Varchar, DBUtilDirection.In, 8000, billing.InvoiceID);
+
+                }
+                //oDBUtility.AddParameters("@InvoiceDate", DBUtilDBType.DateTime, DBUtilDirection.In, 1, billing.InvoiceDate);
+                //oDBUtility.AddParameters("@PaymentMethod", DBUtilDBType.Nvarchar, DBUtilDirection.In, 5, billing.PaymentMethod);
+                //oDBUtility.AddParameters("@TotalAmount", DBUtilDBType.Decimal, DBUtilDirection.In, 10, billing.TotalAmount);
+
+                DataSet ds = oDBUtility.Execute_StoreProc_DataSet("USP_Get_BillingRecord_byId");
+                oServiceRequestProcessor = new ServiceRequestProcessor();
+                return Ok(oServiceRequestProcessor.ProcessRequest(ds));
+
+            }
+            catch (Exception ex)
+            {
+                oServiceRequestProcessor = new ServiceRequestProcessor();
+                return BadRequest(oServiceRequestProcessor.onError(ex.Message));
+            }
+
+        }
     }
 }
