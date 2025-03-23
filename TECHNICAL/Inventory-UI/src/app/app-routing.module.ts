@@ -5,6 +5,7 @@ import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { ProductComponent } from './pages/sidebar/product/product.component';
 import { AddProductComponent } from './pages/sidebar/product/add-product/add-product.component';
 import { AddcategoryComponent } from './pages/sidebar/addcategory/addcategory.component';
+import { SaleDetailsComponent } from './pages/sidebar/sale-details/sale-details.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
           { path: 'AddProduct', component: AddProductComponent }
         ]
        },
-       {path: 'Category', component: AddcategoryComponent}
+       {path: 'Category', component: AddcategoryComponent},
+       {path: 'SaleDetails', component: SaleDetailsComponent}
 
 
     ]

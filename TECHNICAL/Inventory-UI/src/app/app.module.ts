@@ -11,6 +11,7 @@ import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { AddProductComponent } from './pages/sidebar/product/add-product/add-product.component';
 import { AddcategoryComponent } from './pages/sidebar/addcategory/addcategory.component';
 import { HeaderComponent } from './pages/Layout/header/header.component';
+import { SaleDetailsComponent } from './pages/sidebar/sale-details/sale-details.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HeaderComponent } from './pages/Layout/header/header.component';
     AddProductComponent,
     AddcategoryComponent,
     HeaderComponent,
+    SaleDetailsComponent,
   ],
   imports: [
     BrowserModule,
