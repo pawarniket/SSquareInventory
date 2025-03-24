@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../../../core/service/product/product.service';
 import { ProductcategoryService } from '../../../core/service/productcategory/productcategory.service';
+import { SalesdetailsService } from '../../../core/service/saledetails/salesdetails.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class SaleDetailsComponent {
   selectedProduct:any[]=[];
   constructor(private products: ProductService,
    private ProductcategoryService: ProductcategoryService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,private saleservice:SalesdetailsService) {
 
   }
   ngOnInit(): void {
@@ -106,6 +107,7 @@ export class SaleDetailsComponent {
 
     if (index === -1) {
       this.selectedProduct.push(product); 
+      this.saleservice.addProduct(product);
     }else{
       alert("product is already selected")
     }
