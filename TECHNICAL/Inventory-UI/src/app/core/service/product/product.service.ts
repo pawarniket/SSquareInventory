@@ -24,5 +24,9 @@ export class ProductService {
       return this.masterService.post(environment.api+APIConstant.Products.getProduct,val)
 
     }
+    deleteProduct(val:any){
+      return this.masterService.post(environment.api+APIConstant.Products.deleteproduct,val)
+
+    }
 
   }

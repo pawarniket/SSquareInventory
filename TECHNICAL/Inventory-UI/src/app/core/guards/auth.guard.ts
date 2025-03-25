@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree , Router} from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginService } from '../../core/service/Login/Login.service';
+import { UserService } from '../service/user/user.service';
 
 declare function Toastdisplay(type: any, title: any, message: any): any;
 
@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
   //   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
   //   return true;
   // }
-  constructor(public router: Router, private service: LoginService) { }
+  constructor(public router: Router, private service: UserService) { }
   
   canActivate(next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {

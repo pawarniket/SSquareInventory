@@ -133,7 +133,12 @@
   <input id="toasttitle" type="text" class="form-control" hidden />
   <input id="toastmessage" type="text" class="form-control" hidden />
 
-
+  <div class="popup-modal" id="modalpopupdis" >
+    <div class="popup-content">
+        <p id="popupmessage"></p>
+        <button onclick="Popupcloose()">Close</button>
+    </div>
+</div>
   <script>
     function Toastdisplay(type, title, message) {
       document.getElementById('toastTypeGroup').value = type;
@@ -159,8 +164,14 @@
     }
 
 
-
-
+    function Popupdisplay( message) {
+    document.getElementById('popupmessage').innerHTML  = message;
+    document.getElementById("modalpopupdis").style.display = "flex";
+  }
+  function Popupcloose() {
+    document.getElementById('popupmessage').innerHTML  = '';
+    document.getElementById("modalpopupdis").style.display = "none";
+  }
   </script>
 
 

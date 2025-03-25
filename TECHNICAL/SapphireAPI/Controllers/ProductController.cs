@@ -93,7 +93,7 @@ namespace MS.SSquare.API.Controllers
                     oDBUtility.AddParameters("@Price", DBUtilDBType.Decimal, DBUtilDirection.In, 50, product.Price);
                 }
 
-                if (product.StockQuantity != 0)
+                if (product.StockQuantity !=null)
                 {
                     oDBUtility.AddParameters("@StockQuantity", DBUtilDBType.Integer, DBUtilDirection.In, 250, product.StockQuantity);
                 }
@@ -125,6 +125,35 @@ namespace MS.SSquare.API.Controllers
 
         }
 
+        [Route("Product/delete")]
+        [HttpPost]
+        public IActionResult delete(Products product)
+        {
+            try
+            {
+                DBUtility oDBUtility = new DBUtility(_configurationIG);
+                {
+
+                    if (product.ProductID != 0)
+                    {
+                        oDBUtility.AddParameters("@ProductID", DBUtilDBType.Integer, DBUtilDirection.In, 10, product.ProductID);
+                    }
+
+
+
+
+                    DataSet ds = oDBUtility.Execute_StoreProc_DataSet("USP_DELETE_PRODUCT");
+
+                    oServiceRequestProcessor = new ServiceRequestProcessor();
+                    return Ok(oServiceRequestProcessor.ProcessRequest(ds));
+                }
+            }
+            catch (Exception ex)
+            {
+                oServiceRequestProcessor = new ServiceRequestProcessor();
+                return BadRequest(oServiceRequestProcessor.onError(ex.Message));
+            }
+        }
 
 
         [Route("Product/get")]

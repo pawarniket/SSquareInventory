@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +11,10 @@ import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { AddProductComponent } from './pages/sidebar/product/add-product/add-product.component';
 import { AddcategoryComponent } from './pages/sidebar/addcategory/addcategory.component';
 import { HeaderComponent } from './pages/Layout/header/header.component';
+import { LowstockComponent } from './pages/sidebar/lowstock/lowstock.component';
 import { SaleDetailsComponent } from './pages/sidebar/sale-details/sale-details.component';
+import { loaderInterceptor } from './core/interceptors/loader.interceptor';
+import { LoaderComponent } from './pages/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,8 @@ import { SaleDetailsComponent } from './pages/sidebar/sale-details/sale-details.
     AddcategoryComponent,
     HeaderComponent,
     SaleDetailsComponent,
+    LowstockComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,14 @@ import { SaleDetailsComponent } from './pages/sidebar/sale-details/sale-details.
 ReactiveFormsModule,
   ],
   providers: [
-    provideClientHydration(withEventReplay())
+    
+    provideClientHydration(withEventReplay()),
+
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: loaderInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

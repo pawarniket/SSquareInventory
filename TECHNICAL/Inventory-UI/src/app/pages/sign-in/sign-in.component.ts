@@ -14,6 +14,8 @@ export class SignINComponent {
   SignInForm!: FormGroup;
   isPassEmpty = false
   isEmailEmpty  = false
+  response: any = {};
+  UserList: any = [];
 
 
   constructor(private fb: FormBuilder, 
@@ -60,16 +62,34 @@ export class SignINComponent {
   this.user.LoginUser(val).subscribe(
     response => {
 console.log("response",response);
+this.response = response;
 
 if(response.status_code == 100){
+  this.UserList = JSON.parse(this.response['message'])[0];
+
+  localStorage.setItem(
+    'currentUser',
+    this.user.encryptData(JSON.stringify(this.UserList, this.replacer))
+);
+this.user.isAuthenticated = true;
+
       this.router.navigate(['/StockManagement/Product']); // Default fallback route
 }
 else{
   Popupdisplay("User Not Found");
+  this.user.isAuthenticated = false;
 
 }
     });
     
 
+}
+
+replacer(i: any, val: any) {
+  if (i === 'U_password') {
+    return undefined;
+  } else {
+    return val;
+  }
 }
 }

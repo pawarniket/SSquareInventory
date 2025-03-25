@@ -9,13 +9,18 @@ import { SalesdetailsService } from '../../core/service/saledetails/salesdetails
 })
 export class SidebarComponent {
   selectedproducts:any[]=[];
-  isSidebarHidden = false;
+  // isSidebarHidden = false;
+  isSidebarOpen = true;
+
 constructor(private saleservice:SalesdetailsService){
   
 }
-  toggleSidebar() {
-    this.isSidebarHidden = !this.isSidebarHidden;
+toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) {
+    sidebar.classList.toggle('collapsed');
   }
+}
 
   ngOnInit() {
     this.saleservice.selectedProducts$.subscribe((products:any) => {

@@ -19,9 +19,9 @@
 </div>
 
 <!-- Button to Trigger Offcanvas -->
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+<!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
     Open Menu
-</button>
+</button> -->
 
 
 <!-- Bootstrap JS -->
@@ -51,11 +51,15 @@
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
                 <div class="search-set">
-                    <div class="search-input">
-                        <span class="btn-searchset"><i class="ti ti-search fs-14 feather-search"></i></span>
-                    </div>
+                    <form class="flex items-center gap-2 px-3 py-1 text-sm font-medium text-gray-500 border-2 border-solid border-zinc-100 rounded-full w-full max-w-[300px] md:max-w-none"
+                    role="search">
+                    <!-- <label for="searchInput" class="sr-only">Search bookings</label> -->
+                   
+                    <input type="text" id="searchBox" class="bg-transparent border-none outline-none flex-1 w-full"
+                      placeholder="Search here" aria-label="Search bookings" (keyup)="onSearch($event)" autocomplete="off" />
+                  </form>
                 </div>
-                <div class="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
+                <!-- <div class="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                     <div class="dropdown me-2">
                         <a href="javascript:void(0);"
                             class="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
@@ -98,7 +102,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -106,9 +110,8 @@
                         <thead class="thead-light">
                             <tr class="text-center">
 
-                                <th>ProductID </th>
                                 <th>Product Name</th>
-                                <th>CategoryName</th>
+                                <th>Category Name</th>
                                 <th>Price</th>
                                 <th>Qty</th>
                                 <th>RackNumber</th>
@@ -118,25 +121,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center" *ngFor="let product of Productlist">
+                            <tr class="text-center" *ngFor="let product of getPaginatedData()">
 
-                                <td>{{ product.ProductID }} </td>
                                 <td>
 
                                     {{ product.ProductName }}
 
                                 </td>
                                 <td>{{ product.CategoryName }}</td>
-                                <td>${{ product.Price }}</td>
+                                <td>₹{{ product.Price }}</td>
                                 <td>{{ product.StockQuantity }}</td>
                                 <td>{{ product.RackNumber }}</td>
 
                                 <td class="d-flex gap-2 align-items-center justify-content-center">
                                     <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#addProductModal" (click)="editProduct(product)">
+                                        data-bs-target="#addProductModal" (click)="editProduct(product)" >
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
-                                    <button class="btn btn-danger btn-sm">
+                                    <button class="btn btn-danger btn-sm" (click)="deleteproduct(product)">
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </td>
@@ -147,7 +149,25 @@
 
                         </tbody>
                     </table>
-
+                       <!-- Pagination -->
+                       <div class="d-flex justify-content-end align-items-center gap-2 mt-3">
+  
+                        <!-- Previous Button -->
+                        <button (click)="prevPage()" [disabled]="currentPage === 1"
+                          class="btn   btn-sm" aria-label="Previous">
+                          <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                      
+                        <!-- Page Info -->
+                        <span class="fw-semibold text-muted">Page {{ currentPage }} of {{ totalPages }}</span>
+                      
+                        <!-- Next Button -->
+                        <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+                          class="btn  btn-sm" aria-label="Next">
+                          Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                      
+                      </div>
                     
                 </div>
             </div>
@@ -171,7 +191,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalLabel">Add Product</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" id="closebtn" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!-- Add your form or content here -->

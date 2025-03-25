@@ -87,7 +87,9 @@ export class AddcategoryComponent {
         this.ProductCategoryList = JSON.parse(response['message']);
         console.log("hii", this.ProductCategoryList);
         this.filterBookingData = this.ProductCategoryList;
-
+        if (this.filterBookingData[0]?.Message === 'Data not found') {
+          this.filterBookingData = [];
+        }
       });
   }
 
@@ -108,11 +110,6 @@ export class AddcategoryComponent {
   currentPage = 1;
   itemsPerPage = 5;
 
-  // data = Array.from({ length: 50 }, (_, i) => ({
-  //   id: i + 1,
-  //   name: `User ${i + 1}`,
-  //   age: 20 + (i % 10)
-  // }));
 
 
   get totalPages(): number {

@@ -1,23 +1,30 @@
-<app-header></app-header>
-<a id="toggle_btn" (click)="toggleSidebar()">
+<!-- <a id="toggle_btn" (click)="toggleSidebar()">
     <i data-feather="chevrons-left" class="feather-16"></i>
-</a>
+</a> -->
 <!-- Sidebar -->
+<!-- Sidebar -->
+ <div class="heaer">
+<app-header></app-header>
+</div>
 <div class="sidebar d-none d-md-block" id="sidebar">
     <!-- Logo -->
     <div class="sidebar-logo">
         <a href="index.html" class="logo logo-normal">
-            <img src="assets/img/ssquarelogo.png" alt="Img">
+            <img src="assets/img/ssquarelogo.png" alt="Img" class="logo-img">
         </a>
-        <a href="index.html" class="logo logo-white">
+        <a href="index.html" class="logo logo-small">
+            <img src="assets/img/ssquarelogo.png" alt="Img" class="logo-img-small">
+        </a>
+        <a id="toggle_btn" (click)="toggleSidebar()">
+            <i data-feather="chevrons-left" class="feather-16"></i>
+        </a> 
+        <!-- <a href="index.html" class="logo logo-white">
             <img src="assets/img/logo-white.svg" alt="Img">
         </a>
         <a href="index.html" class="logo-small">
             <img src="assets/img/logo-small.png" alt="Img">
         </a>
-        <a id="toggle_btn" (click)="toggleSidebar()">
-            <i data-feather="chevrons-left" class="feather-16"></i>
-        </a>
+     -->
     </div>
     <!-- /Logo -->
 
@@ -43,9 +50,9 @@
                             </a>
                         </li>
                         <li>
-                            <!-- <a href="low-stocks.html" class="d-flex align-items-center p-2">
-                                <i class="ti ti-trending-up-2 fs-16 me-2"></i><span>Low Stocks</span>
-                            </a> -->
+                            <a routerLink="LowStock" routerLinkActive="active-link" class="mt-2 d-flex align-items-center p-2">
+                                <i class="ti ti-trending-up-2 fs-16 me-2"></i><span>Low Stock</span>
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -53,6 +60,8 @@
         </div>
     </div>
 </div>
+<!-- /Sidebar -->
+
 <!-- /Sidebar -->
 
 <!-- Content -->
