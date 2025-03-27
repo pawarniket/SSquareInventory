@@ -64,3 +64,84 @@
 .logo {
     background: inherit; /* Matches the parent/header background */
 }
+
+/* Main container */
+.container-flex {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Product list card */
+.product-list {
+    flex: 1; /* Take full available width */
+    min-width: 65%;
+}
+
+/* Right Sidebar */
+.right-sidebar {
+    width: 300px;
+    background: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    min-height: 400px;
+}
+
+/* Sidebar visibility */
+
+
+.right-sidebar {
+    display: none; /* Hide initially */
+}
+
+.right-sidebar.show {
+    display: flex; /* Ensure it becomes visible */
+}
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+/* Right Sidebar */
+.right-sidebar {
+    width: 300px;
+    background: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make sidebar content scrollable */
+.sidebar-body {
+    flex: 1; /* Takes full height */
+    max-height: 300px; /* Adjust height as needed */
+    overflow-y: auto; /* Enables scrolling */
+    padding-right: 5px;
+}
+
+/* Custom scrollbar */
+.sidebar-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-body::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.sidebar-body::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+.sidebar-body .btn-outline-secondary {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+}
