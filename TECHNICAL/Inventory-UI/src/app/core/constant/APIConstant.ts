@@ -17,6 +17,13 @@ export const APIConstant = {
         UpdateProductscategory:'Productcategory/update',
         getProductCategory:'Productcategory/get'
 
+      },
+      sales:{
+        insertsales:'Sales/insert',
+        Updatesales:'Sales/Update',
+        getsales:'Sales/Get',
+        deletesales:'Sales/Delete'
+
       }
 
 }

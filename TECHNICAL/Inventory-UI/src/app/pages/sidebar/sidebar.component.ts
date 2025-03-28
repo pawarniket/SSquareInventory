@@ -23,9 +23,6 @@ toggleSidebar() {
 }
 
   ngOnInit() {
-    this.saleservice.selectedProducts$.subscribe((products:any) => {
-      this.selectedproducts = products;
-      console.log("Updated Selected Products in Other Component:", this.selectedproducts);
-    });
+    
   }
 }

@@ -1,22 +1,30 @@
 import { Injectable } from '@angular/core';
-import { MasterService } from '../master/master.service';
-import { environment } from '../../../../environments/environment';
 import { APIConstant } from '../../constant/APIConstant';
-import { SidebarComponent } from '../../../pages/sidebar/sidebar.component';
-import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../../../environments/environment';
+import { MasterService } from '../master/master.service';
 @Injectable({
   providedIn: 'root'
 })
 export class SalesdetailsService {
-// selectedproducts:any[]=[];
-private selectedProductsSubject = new BehaviorSubject<any[]>([]);
-selectedProducts$ = this.selectedProductsSubject.asObservable();
 
-constructor() {}
+  constructor(private masterService : MasterService) { }
 
-addProduct(product: any) {
-  const updatedList = [...this.selectedProductsSubject.value, product];
-  this.selectedProductsSubject.next(updatedList);
-  console.log("Updated selected products:", updatedList);
-}
+
+  Addsales(val:any){
+    return this.masterService.post(environment.api+APIConstant.sales.insertsales,val)
+
+  }
+  
+  Updatesales(val:any){
+    return this.masterService.post(environment.api+APIConstant.sales.Updatesales,val)
+  }
+
+  getsales(val:any){
+    return this.masterService.post(environment.api+APIConstant.sales.getsales,val)
+
+  }
+  deletesales(val:any){
+    return this.masterService.post(environment.api+APIConstant.sales.deletesales,val)
+
+  }
 }

@@ -38,9 +38,17 @@ namespace MS.SSquare.API.Controllers
                     oDBUtility.AddParameters("@ClientID", DBUtilDBType.Varchar, DBUtilDirection.In, 8000, sale.ClientID);
 
                 }
-                oDBUtility.AddParameters("@SaleDate", DBUtilDBType.DateTime, DBUtilDirection.In, 1, sale.SaleDate);
-                oDBUtility.AddParameters("@PaymentStatus", DBUtilDBType.Nvarchar, DBUtilDirection.In, 5, sale.PaymentStatus);
-                oDBUtility.AddParameters("@TotalAmount", DBUtilDBType.Decimal, DBUtilDirection.In, 10, sale.TotalAmount);
+
+
+                if (!string.IsNullOrEmpty(sale.PaymentStatus))
+                {
+                    oDBUtility.AddParameters("@PaymentStatus", DBUtilDBType.Nvarchar, DBUtilDirection.In, 5, sale.PaymentStatus);
+                }
+
+                if (sale.TotalAmount != 0)
+                {
+                    oDBUtility.AddParameters("@TotalAmount", DBUtilDBType.Decimal, DBUtilDirection.In, 10, sale.TotalAmount);
+                }
 
                 DataSet ds = oDBUtility.Execute_StoreProc_DataSet("USP_InsertSale");
                 oServiceRequestProcessor = new ServiceRequestProcessor();

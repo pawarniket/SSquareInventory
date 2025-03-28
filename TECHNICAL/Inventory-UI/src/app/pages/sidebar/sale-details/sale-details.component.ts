@@ -2,6 +2,7 @@ import { Component, } from '@angular/core';
 import { ProductService } from '../../../core/service/product/product.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductcategoryService } from '../../../core/service/productcategory/productcategory.service';
+import { SalesdetailsService } from '../../../core/service/saledetails/salesdetails.service';
 // declare function closePopup(id: any): any;
 declare function Popupdisplay(message: any): any;
 @Component({
@@ -18,7 +19,7 @@ export class SaleDetailsComponent {
    isSidebarVisible = false;      // Sidebar visibility
    constructor(private products: ProductService,
     private ProductcategoryService: ProductcategoryService,
-     private formBuilder: FormBuilder) {
+     private formBuilder: FormBuilder,public salesService :SalesdetailsService) {
  
    }
    ngOnInit(): void {
@@ -211,6 +212,7 @@ addproduct(product: any) {
   if (!exists) {
     this.selectedProducts.push({ ...product, Quantity: 1 });
   }
+  else{alert("Product already added")}
   this.isSidebarVisible = true; // Show the sidebar
 }
 
@@ -226,10 +228,24 @@ removeProduct(index: number) {
 toggleSidebar() {
   this.isSidebarVisible = !this.isSidebarVisible;
 }
+// increaseQuantity(productId: number): void {
+//   const product = this.selectedProducts.find(p => p.ProductID === productId);
+//   if (product) {
+//     product.Quantity += 1;
+//   }
+// }
+
+// decreaseQuantity(productId: number): void {
+//   const product = this.selectedProducts.find(p => p.ProductID === productId);
+//   if (product && product.Quantity > 1) {
+//     product.Quantity -= 1;
+//   }
+// }
 increaseQuantity(productId: number): void {
   const product = this.selectedProducts.find(p => p.ProductID === productId);
   if (product) {
     product.Quantity += 1;
+    product.TotalPrice = product.Quantity * product.Price; // Update total price
   }
 }
 
@@ -237,12 +253,39 @@ decreaseQuantity(productId: number): void {
   const product = this.selectedProducts.find(p => p.ProductID === productId);
   if (product && product.Quantity > 1) {
     product.Quantity -= 1;
+    product.TotalPrice = product.Quantity * product.Price; // Update total price
   }
 }
 
-
 logProducts(): void {
+
   console.log("Selected Products:", this.selectedProducts);
+  const val={
+    ClientID:1,
+    PaymentStatus: 'Pending',
+  }
+  this.salesService.Addsales(val).subscribe((data) => {
+   // console.log("kalu", data);
+    
+    if (data.status_code === 100) { 
+      const insertdata = JSON.parse(data.message);
+      const salesid = insertdata[0].SaleID;
+      this.selectedProducts.forEach((ele: any) => {
+        ele.SaleID = salesid; 
+        const val={
+          SaleID:salesid,
+          ProductID:ele.ProductID,
+          Quantity:ele.Quantity,
+          Price:ele.TotalPrice?ele.TotalPrice:ele.Price
+        }
+        console.log("brijesh",val)
+        this.selectedProducts=[];
+        this.isSidebarVisible = false;
+      });
+  
+      
+    }
+  });
 }
 clearProducts(): void {
   this.selectedProducts = []; // Clears all products and hides the sidebar
