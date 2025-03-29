@@ -290,5 +290,7 @@ logProducts(): void {
 clearProducts(): void {
   this.selectedProducts = []; // Clears all products and hides the sidebar
 }
-
+isProductSelected(product: any): boolean {
+  return this.selectedProducts.some(p => p.ProductID === product.ProductID);
+}
 }

@@ -129,8 +129,11 @@
                                 <tr class="text-center" *ngFor="let product of getPaginatedData()">
                                     <td>{{ product.ProductName }}</td>
                                     <td class="d-flex gap-2 align-items-center justify-content-center">
-                                        <button class="btn btn-success btn-sm" (click)="addproduct(product)">
-                                            <i class="fas fa-plus"></i> Add
+                                        <button class="btn  btn-sm"   [ngClass]="isProductSelected(product) ? 'btn-secondary' : 'btn-success'"
+                                        [disabled]="isProductSelected(product)" 
+                                        (click)="addproduct(product)">
+                                        {{ isProductSelected(product) ? 'Added' : 'Add to Cart' }} >
+                                            <!-- <i class="fas fa-plus"></i> Add -->
                                         </button>
                                     </td>
                                 </tr>
